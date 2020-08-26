@@ -23,7 +23,7 @@ export class ProductService {
 
   updateProduct(productId: string, title: string, desc: string, price: number) {
     const [product, index] = this.findProduct(productId)
-    const updatedProduct = { ...product }
+    const updatedProduct = {...product}
     if(title) {
       updatedProduct.title = title;
     }
@@ -33,7 +33,12 @@ export class ProductService {
     if(price) {
       updatedProduct.price = price;
     }
-    this.products[index] = { ...product}
+    this.products[index] = updatedProduct;
+  }
+
+  deleteProduct(prodId: string) {
+    const index = this.findProduct(prodId)[1];
+    this.products.splice(index, 1 )
   }
 
   private findProduct(productId: string): [Product, number] {
